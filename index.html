@@ -1,249 +1,259 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My portfolio - Hoang Dieu</title>
+    <title>Hoang Thi Dieu | Data Analyst Portfolio</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Swiper CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-
-    <!-- Swiper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-
 </head>
 <body>
-    <nav class="container">
-        <a href="#" class="logo">Portfolio.</a>
-        <ul>
-            <li class="active"><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
 
-    <section id="home" class="home">
-        <div class="home-info">
-            <h1>Hi! I'm Hoang Thi Dieu</h1>
-            <h2>And I'm a Fresher Data Analyst</h2>
-            <p>I'm passionate about transforming raw data into stories that inspire smarter decisions.<br>Currently pursuing a Bachelor's degree in Information Systems at the University of Science, VNU HCM, I specialize in data analytics, visualization, and data engineering pipelines.</p>
-            <!-- <div class="btn-sci">
-                <a href="files/HoangThiDieu_CV.pdf" class ="btn">Download CV</a>
-            </div> -->
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">Dieu.<span>Data</span></a>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact" class="nav-btn">Contact</a></li>
+            </ul>
         </div>
-        <div class="home-img">
-            <div class="img-box">
-                <div class="img-item">
-                    <img src="assets/avt.png" alt="">
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="hero-section">
+        <div class="hero-content">
+            <div class="badge"><i data-lucide="sparkles"></i> Open for Data Analyst Opportunities</div>
+            <h1>Transforming Complex Data into <span class="gradient-text">Actionable Business Insights</span></h1>
+            <p class="hero-desc">
+                Hi, I'm <strong>Hoang Thi Dieu</strong> — an Information Systems Graduate & Data Analyst. 
+                I specialize in SQL data transformation, automated intelligence via Python/AI tools, and interactive Power BI executive dashboards.
+            </p>
+            <div class="hero-actions">
+                <a href="#projects" class="btn btn-primary"><i data-lucide="layout-grid"></i> View Featured Projects</a>
+                <a href="https://github.com/justbeDieu" target="_blank" class="btn btn-secondary"><i data-lucide="github"></i> GitHub Profile</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- WORK EXPERIENCE BANNER -->
+    <section id="experience" class="exp-section">
+        <div class="section-header">
+            <span class="sub-title">PRACTICAL EXPERIENCE</span>
+            <h2>Work Experience</h2>
+        </div>
+        <div class="exp-card">
+            <div class="exp-header">
+                <div>
+                    <h3>Data & Analytics Office Intern</h3>
+                    <p class="company-name"><i data-lucide="building-2"></i> SAM Foundation CO., LTD</p>
+                </div>
+                <span class="exp-date">Jul 2026 – Sep 2026 (Expected)</span>
+            </div>
+            <ul class="exp-list">
+                <li><strong>Market & Competitor Intelligence:</strong> Analyzed cross-industry datasets across Financial Services & Real Estate sectors to benchmark competitors and uncover customer trends.</li>
+                <li><strong>Data Enrichment & Web Scraping:</strong> Built automated data scraping pipelines using Python & APIs; integrated LLMs via Prompt Engineering for intelligent data categorization and enrichment.</li>
+                <li><strong>Executive Reporting:</strong> Designed visual business summaries and dashboards to support senior leadership in strategic decision-making.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- FEATURED PROJECTS -->
+    <section id="projects" class="projects-section">
+        <div class="section-header">
+            <span class="sub-title">PORTFOLIO</span>
+            <h2>Featured Projects</h2>
+            <p class="section-desc">Real-world data analytics solutions spanning BI dashboarding, ETL pipelines, and predictive analytics.</p>
+        </div>
+
+        <div class="projects-grid">
+            <!-- PROJECT 1 (HERO) -->
+            <div class="project-card featured-card">
+                <div class="card-img-wrapper">
+                    <img src="assets/prj5_0.png" alt="Brazilian E-commerce Analytics">
+                    <span class="card-badge">Featured Case Study</span>
+                </div>
+                <div class="card-body">
+                    <div class="card-tags">
+                        <span>SQL</span>
+                        <span>Power BI</span>
+                        <span>Python</span>
+                        <span>Star Schema</span>
+                    </div>
+                    <h3>E-commerce Marketplace Analytics Dashboard</h3>
+                    <p>End-to-end analytics on 100K orders and 99K customers across 8 relational tables. Features 4 interactive modules tracking AOV, repeat purchase rates, and seller revenue concentration.</p>
+                    <div class="card-footer">
+                        <a href="project5.html" class="btn-link">View Case Study <i data-lucide="arrow-right"></i></a>
+                        <a href="https://github.com/justbeDieu/Brazilian-ECommerce-Olist" target="_blank" class="icon-link" title="GitHub Code"><i data-lucide="github"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROJECT 2 -->
+            <div class="project-card">
+                <div class="card-img-wrapper">
+                    <img src="assets/prj3_1.png" alt="BI & Data Warehouse">
+                </div>
+                <div class="card-body">
+                    <div class="card-tags">
+                        <span>SSIS</span>
+                        <span>SSAS</span>
+                        <span>Power BI</span>
+                        <span>SQL Server</span>
+                    </div>
+                    <h3>Business Intelligence & Data Warehouse</h3>
+                    <p>Designed Star/Snowflake schemas and built automated ETL pipelines with SSIS to load multi-source data into SSAS OLAP cubes for multi-dimensional air quality analysis.</p>
+                    <div class="card-footer">
+                        <a href="project3.html" class="btn-link">View Case Study <i data-lucide="arrow-right"></i></a>
+                        <a href="https://github.com/trieuvisaooo/US_AQI_Analysis" target="_blank" class="icon-link" title="GitHub Code"><i data-lucide="github"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROJECT 3 -->
+            <div class="project-card">
+                <div class="card-img-wrapper">
+                    <img src="assets/prj2.png" alt="User Behavior Analysis">
+                </div>
+                <div class="card-body">
+                    <div class="card-tags">
+                        <span>Python</span>
+                        <span>Scikit-Learn</span>
+                        <span>EDA</span>
+                        <span>Random Forest</span>
+                    </div>
+                    <h3>User Behavior Analysis for Ad Click Prediction</h3>
+                    <p>Performed exploratory data analysis to discover conversion drivers and trained machine learning models achieving 85% accuracy (+12% lift) to optimize digital ad targeting.</p>
+                    <div class="card-footer">
+                        <a href="project2.html" class="btn-link">View Case Study <i data-lucide="arrow-right"></i></a>
+                        <a href="https://github.com/justbeDieu/MyProject/blob/main/PTDLUD.ipynb" target="_blank" class="icon-link" title="GitHub Code"><i data-lucide="github"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROJECT 4 -->
+            <div class="project-card">
+                <div class="card-img-wrapper">
+                    <img src="assets/prj4_0.png" alt="Healthcare Analytics">
+                </div>
+                <div class="card-body">
+                    <div class="card-tags">
+                        <span>Power BI</span>
+                        <span>DAX</span>
+                        <span>Healthcare Analytics</span>
+                    </div>
+                    <h3>Healthcare Operations & Billing Dashboard</h3>
+                    <p>Interactive dashboard visualizing patient admissions, length of stay, medication usage, and insurance billing to support hospital management decision-making.</p>
+                    <div class="card-footer">
+                        <a href="project4.html" class="btn-link">View Case Study <i data-lucide="arrow-right"></i></a>
+                        <a href="https://github.com/justbeDieu/MyProject/blob/main/Healthcare.pbix" target="_blank" class="icon-link" title="GitHub Code"><i data-lucide="github"></i></a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <div class="divider"></div>
-
-    <section id="about" class="about">
-    <h2>About Me</h2>
-    <p>I am an Information Systems student with a strong interest in data analysis and business intelligence.<br>
-        With hands-on experience in SQL, Python, Power BI, and ETL workflows, I'm seeking opportunities to apply analytical skills in real-world projects.</p>
-    <div class="about-info">
-        <div class="education">
-        <h3>
-            <i data-lucide="graduation-cap" class="icon"></i>
-            Education
-        </h3>
-        <p>2021 - present</p>
-        <p><strong>Bachelor of Information Systems</strong> - <em>University of Science, VNU HCM</em></p>
-        <p><strong>GPA:</strong> 8.1 / 10</p>
+    <!-- SKILLS SECTION -->
+    <section id="skills" class="skills-section">
+        <div class="section-header">
+            <span class="sub-title">CORE COMPETENCIES</span>
+            <h2>Technical Toolkit</h2>
         </div>
-
-        <div class="certifications">
-        <h3>
-            <i data-lucide="award" class="icon"></i>
-            Certifications
-        </h3>
-        <ul>
-            <li>TOEIC L&amp;R: <strong>690</strong> (Dec 2023)</li>
-            <li>TOEIC S&amp;W: <strong>260</strong> (Jul 2024)</li>
-        </ul>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <div class="cat-header"><i data-lucide="database"></i> <h4>Data Analysis & Querying</h4></div>
+                <div class="tag-cloud">
+                    <span>SQL (MySQL, SQL Server)</span>
+                    <span>Complex JOINs & CTEs</span>
+                    <span>Window Functions</span>
+                    <span>Python (Pandas, NumPy)</span>
+                    <span>Data Cleaning</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <div class="cat-header"><i data-lucide="bar-chart-3"></i> <h4>BI & Visualization</h4></div>
+                <div class="tag-cloud">
+                    <span>Power BI (DAX, Power Query)</span>
+                    <span>Star / Snowflake Schema</span>
+                    <span>Tableau</span>
+                    <span>Executive Dashboards</span>
+                    <span>Data Storytelling</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <div class="cat-header"><i data-lucide="sparkles"></i> <h4>AI & Automation</h4></div>
+                <div class="tag-cloud">
+                    <span>Prompt Engineering</span>
+                    <span>LLM Integration via APIs</span>
+                    <span>Web Scraping (BeautifulSoup)</span>
+                    <span>Google Colab</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <div class="cat-header"><i data-lucide="file-spreadsheet"></i> <h4>Spreadsheets & Tools</h4></div>
+                <div class="tag-cloud">
+                    <span>Advanced Excel (XLOOKUP, Pivot)</span>
+                    <span>Microsoft Office Suite</span>
+                    <span>Git & GitHub</span>
+                    <span>Figma / draw.io</span>
+                </div>
+            </div>
         </div>
-    </div>
     </section>
 
-    <div class="divider"></div>
-
-    <section class="skills" id="skills">
-        <h2>My Skills</h2>
-        <div class="skills-container">
-            <div class="technical-skills">
-                <h3>Technical Skills</h3>
-
-                <div class="skill">
-                    <p><i data-lucide="database"></i> SQL</p>
-                    <div class="progress-bar"><span style="width: 70%">70%</span></div>
-                </div>
-
-                <div class="skill">
-                    <p><i data-lucide="code"></i> Python (Pandas, NumPy, Matplotlib)</p>
-                    <div class="progress-bar"><span style="width: 70%">70%</span></div>
-                </div>
-
-                <div class="skill">
-                    <p><i data-lucide="chart-column"></i> Power BI / Tableau</p>
-                    <div class="progress-bar"><span style="width: 80%">80%</span></div>
-                </div>
-
-                <div class="skill">
-                    <p><i data-lucide="sheet"></i> Excel (Pivot, Dashboard)</p>
-                    <div class="progress-bar"><span style="width: 70%">70%</span></div>
-                </div>
-
+    <!-- ABOUT & CREDENTIALS -->
+    <section id="about" class="about-section">
+        <div class="section-header">
+            <span class="sub-title">BACKGROUND</span>
+            <h2>About & Credentials</h2>
+        </div>
+        <div class="about-grid">
+            <div class="about-card">
+                <i data-lucide="graduation-cap" class="about-icon"></i>
+                <h3>Education</h3>
+                <p><strong>Bachelor of Information Systems</strong></p>
+                <p class="institution">University of Science, VNU-HCM (2021 – 2025)</p>
+                <div class="gpa-badge">GPA: 8.1 / 10.0</div>
             </div>
-
-            <div class="professional-skills">
-                <h3>Professional Skills</h3>
-
-                <div class="circle-container">
-                    <div class="circle">
-                    <svg>
-                        <circle cx="70" cy="70" r="60"></circle>
-                        <circle cx="70" cy="70" r="60" style="--percent:85;"></circle>
-                    </svg>
-                    <div class="number"><h3>90<span>%</span></h3></div>
-                    <p class="skill-name">Critical Thinking</p>
-                    </div>
-
-                    <div class="circle">
-                    <svg>
-                        <circle cx="70" cy="70" r="60"></circle>
-                        <circle cx="70" cy="70" r="60" style="--percent:80;"></circle>
-                    </svg>
-                    <div class="number"><h3>80<span>%</span></h3></div>
-                    <p class="skill-name">Teamwork</p>
-                    </div>
-
-                    <div class="circle">
-                    <svg>
-                        <circle cx="70" cy="70" r="60"></circle>
-                        <circle cx="70" cy="70" r="60" style="--percent:85"></circle>
-                    </svg>
-                    <div class="number"><h3>75<span>%</span></h3></div>
-                    <p class="skill-name">Problem Solving</p>
-                    </div>
-
-                    <div class="circle">
-                    <svg>
-                        <circle cx="70" cy="70" r="60"></circle>
-                        <circle cx="70" cy="70" r="60" style="--percent:80;"></circle>
-                    </svg>
-                    <div class="number"><h3>85<span>%</span></h3></div>
-                    <p class="skill-name">Communication</p>
-                    </div>
-                </div>
-            </div>
-            <div class="extra-skills">
-                <h3>Additional Skills & Tools</h3>
-                
-                <ul class="extra-skill-list">
-                    <li>Power Query</li>
-                    <li>Data Modeling</li>
-                    <li>Dashboard Storytelling</li>
-                    <li>Data Pipeline Development</li>
-                    <li>C++</li>
-                    <li>Mobile App Development (Kotlin)</li>
-                    <li>Scikit-Learn (basic)</li>
-                    <li>Figma</li>
-                    <li>Notion</li>
+            <div class="about-card">
+                <i data-lucide="award" class="about-icon"></i>
+                <h3>Certifications</h3>
+                <ul class="cert-list">
+                    <li><i data-lucide="check-circle-2"></i> TOEIC Listening & Reading: <strong>690</strong> (Dec 2023)</li>
+                    <li><i data-lucide="check-circle-2"></i> TOEIC Speaking & Writing: <strong>260</strong> (Jul 2024)</li>
                 </ul>
             </div>
-
         </div>
     </section>
 
-    <div class="divider"></div>
-
-    <section id="portfolio" class="portfolio">
-        <h2>My Project</h2>
-        <div class="portfolio-grid">
-            
-            <div class="project-card">
-                <img src="assets/prj1_0.png" alt="Phân tích E-commerce">
-                <h4>1. Real-Time Credit Card Transaction Analytics</h4>
-                <p>A data engineering project focused on building a real-time fraud detection pipeline that processes and visualizes credit card transactions.</p>
-                <p class="project-tags">Tags: Kafka, Spark Streaming, Airflow, Hadoop, Power BI, Data Pipeline, Realtime Analytics</p>
-                <a href="project1.html" class="project-link">Xem chi tiết</a>
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="contact-section">
+        <div class="contact-container">
+            <span class="sub-title">GET IN TOUCH</span>
+            <h2>Let's Build Data-Driven Solutions Together</h2>
+            <p>I'm actively seeking Data Analyst (Fresher / Junior) opportunities where I can apply analytics, automated intelligence, and dashboarding to deliver tangible business value.</p>
+            <div class="contact-links">
+                <a href="mailto:hgdieu.qifrey@gmail.com" class="contact-pill"><i data-lucide="mail"></i> hgdieu.qifrey@gmail.com</a>
+                <a href="https://github.com/justbeDieu" target="_blank" class="contact-pill"><i data-lucide="github"></i> github.com/justbeDieu</a>
+                <a href="https://justbedieu.github.io" target="_blank" class="contact-pill"><i data-lucide="globe"></i> justbedieu.github.io</a>
             </div>
-
-            <div class="project-card">
-                <img src="assets/prj2.png" alt="User Behavior Analysis">
-                <h4>2. User Behavior Analysis for Ad Clicks</h4>
-                <p>A data analytics and machine learning project to understand and predict user click behavior in online advertising.</p>
-                <p class="project-tags">Tags: Python, Pandas, Scikit Learn, EDA, Data Visualization, Predictive Modeling, Google Colab</p>
-                <a href="project2.html" class="project-link">Xem chi tiết</a>
-            </div>
-            <div class="project-card">
-                <img src="assets/prj3.png" alt="Business Intelligence">
-                <h4>3. Business Intelligence & Data Warehouse</h4>
-                <p>A data warehouse and BI project analyzing air quality trends across U.S. states, providing insights into pollution levels and seasonal variations.</p>
-                <p class="project-tags">Tags: BI, Data Warehouse, SSIS, SSAS, PowerBI, ETL, OLAP, Data Modeling, SQLServer</p>
-                <a href="project3.html" class="project-link">Xem chi tiết</a>
-            </div>
-
-            <div class="project-card">
-                <img src="assets/prj4_0.png" alt="Healthcare">
-                <h4>4. Healthcare Analytics Power BI Dashboard</h4>
-                <p>A comprehensive Power BI dashboard enabling multi-dimensional analysis of healthcare data.</p>
-                <p class="project-tags">Tags: Power BI, Healthcare Analytics, Data Visualization, ETL, DAX, Data Modeling</p>
-                <a href="project4.html" class="project-link">Xem chi tiết</a>
-            </div>
-
-            <div class="project-card">
-                <img src="assets/prj5_0.png" alt="Olist E-commerce">
-                <h4>5. Brazilian E-commerce Analytics Dashboard</h4>
-                <p>An end-to-end analytics dashboard using SQL and Power BI to analyze Brazilian e-commerce data and uncover insights into sales trends, customer behavior, and seller performance.</p>
-                <p class="project-tags">Tags: Power BI, E-commerce Analytics, Data Visualization, SQL, Data Modeling</p>
-                <a href="project5.html" class="project-link">Xem chi tiết</a>
-            </div>
-            
         </div>
     </section>
 
-    <div class="divider"></div>
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 Hoang Thi Dieu. Crafted with precision & data-driven mindset.</p>
+    </footer>
 
-    <section id="contact" class="contact">
-        <h2>Contact</h2>
-        <p>Thank you for taking the time to explore my portfolio.
-            <br>If you're looking for someone who's detail-oriented, curious, and eager to learn in the field of data analytics, I'd be glad to connect.
-            <br>I'm open to internship or entry-level opportunities - let's discuss how I can add value to your team.</p>
-        <ul class="contact-list">
-            <li>
-                <i data-lucide="map-pin"></i>
-                <span>Ho Chi Minh, Vietnam</span>
-            </li>
-            <li>
-                <i data-lucide="mail"></i>
-                <a href="mailto:hgdieu.qifrey@gmail.com">hgdieu.qifrey@gmail.com</a>
-            </li>
-            <li>
-                <i data-lucide="phone"></i>
-                <span id="phone-number" class="copy-text">+84 849 782 351</span>
-                <button class="ic-copy" onclick="copyText()" title="Copy">
-                    <i id="copy-icon" data-lucide="copy" style="width:14px; height:14px;"></i>
-                </button>
-
-            </li>
-            <li>
-                <i data-lucide="github"></i>
-                <a href="https://github.com/justbeDieu" target="_blank">github.com/justbeDieu</a>
-            </li>
-        </ul>
-
-    </section>
-
-    <script src="script.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>

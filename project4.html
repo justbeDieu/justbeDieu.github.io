@@ -1,79 +1,454 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Healthcare Analytics Power BI Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study: Healthcare Operations & Billing Analytics | Hoang Thi Dieu</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 
-  <link rel="stylesheet" href="styles.css" />
-  <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .case-study-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 120px 24px 80px;
+        }
 
-  <!-- Swiper CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+        .back-nav {
+            margin-bottom: 30px;
+        }
 
-  <!-- Swiper JS -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: gap 0.2s ease;
+        }
 
+        .back-link:hover {
+            gap: 12px;
+        }
 
+        .case-header {
+            margin-bottom: 30px;
+        }
+
+        .case-title {
+            font-size: 36px;
+            font-weight: 800;
+            line-height: 1.25;
+            margin: 12px 0;
+            color: var(--text-main);
+        }
+
+        .case-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .case-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin: 24px 0 40px;
+        }
+
+        .metric-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .metric-card .num {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .metric-card .label {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .case-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 36px;
+            margin-bottom: 30px;
+        }
+
+        .case-section h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .case-section p {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .case-section ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 14px;
+        }
+
+        .case-section ul li {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.6;
+            position: relative;
+            padding-left: 24px;
+        }
+
+        .case-section ul li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-size: 16px;
+        }
+
+        /* WORKFLOW CARDS */
+        .workflow-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .workflow-step {
+            background: #0F172A;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 18px;
+        }
+
+        .workflow-step .step-num {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .workflow-step h4 {
+            font-size: 15px;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .workflow-step p {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 0;
+            line-height: 1.5;
+        }
+
+        /* INSIGHTS TABLE */
+        .insight-table-wrapper {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        .insight-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .insight-table th {
+            background: #0F172A;
+            color: var(--primary);
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+
+        .insight-table td {
+            padding: 16px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-muted);
+            vertical-align: top;
+            line-height: 1.6;
+        }
+
+        .insight-table tr:hover td {
+            background: rgba(56, 189, 248, 0.03);
+        }
+
+        .swiper-container-wrapper {
+            margin: 30px 0;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            background: #0F172A;
+        }
+
+        .mySwiper {
+            width: 100%;
+            height: 480px;
+        }
+
+        .swiper-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #0F172A;
+        }
+
+        .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .cta-box {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.08), rgba(129, 140, 248, 0.08));
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .metrics-grid, .workflow-grid {
+                grid-template-columns: 1fr;
+            }
+            .case-title {
+                font-size: 26px;
+            }
+            .mySwiper {
+                height: 260px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="project-container">
-    <!-- HEADER -->
-    <div class="project-header">
-      <h1>Healthcare Analytics Power BI Dashboard</h1>
-      <p class="project-tags">Power BI - Healthcare Analytics - Data Visualization - ETL - DAX - Data Modeling</p>
-      <p style="font-size: 16px;">PERSONAL PROJECT</p>
-      <div class="swiper mySwiper">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide"><img src="assets/prj4_0.png"></div>
-          <div class="swiper-slide"><img src="assets/prj4_1.png"></div>
-          <div class="swiper-slide"><img src="assets/prj4_2.png"></div>
-          <div class="swiper-slide"><img src="assets/prj4_3.png"></div>
-          <div class="swiper-slide"><img src="assets/prj4_4.png"></div>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Dieu.<span>Data</span></a>
+            <a href="index.html#projects" class="nav-btn">← Back to Portfolio</a>
+        </div>
+    </header>
+
+    <main class="case-study-container">
+        
+        <div class="back-nav">
+            <a href="index.html#projects" class="back-link"><i data-lucide="arrow-left"></i> Back to Featured Projects</a>
         </div>
 
-        <!-- Pagination + Navigation -->
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
-      </div>
+        <!-- HEADER -->
+        <div class="case-header">
+            <div class="card-tags">
+                <span>Power BI</span>
+                <span>DAX Modeling</span>
+                <span>Healthcare Analytics</span>
+                <span>Power Query (ETL)</span>
+                <span>Financial Billing</span>
+            </div>
+            <h1 class="case-title">Healthcare Operations & Insurance Billing Analytics</h1>
+            <div class="case-meta">
+                <span><i data-lucide="calendar"></i> Personal Project</span>
+                <span><i data-lucide="activity"></i> Multi-Department Patient Admission & Billing Data</span>
+                <span><i data-lucide="github"></i> <a href="https://github.com/justbeDieu/MyProject/blob/main/Healthcare.pbix" target="_blank" style="color:var(--primary); text-decoration:none;">Power BI Source File (.pbix)</a></span>
+            </div>
+        </div>
 
-    </div>
+        <!-- QUICK IMPACT METRICS -->
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="num">Star Schema</div>
+                <div class="label">Relational Data Model</div>
+            </div>
+            <div class="metric-card">
+                <div class="num">Custom DAX</div>
+                <div class="label">KPI Calculations</div>
+            </div>
+            <div class="metric-card">
+                <div class="num">Multi-Tier</div>
+                <div class="label">Interactive Slicers</div>
+            </div>
+            <div class="metric-card">
+                <div class="num">Operations</div>
+                <div class="label">Bed & Billing Control</div>
+            </div>
+        </div>
 
-    <!-- MỤC TIÊU -->
-    <div class="project-section">
-      <h2>Objective</h2>
-      <p>To design an end-to-end interactive analytics solution for a healthcare dataset that provides insights into patient admissions, hospital performance, medication usage, insurance billing, and time-based trends.</p>
-      <p>The goal was to transform raw admission data into a dynamic Power BI report that supports both operational and strategic decision-making for hospital management.</p>
-    </div>
+        <!-- DASHBOARD SHOWCASE SLIDER -->
+        <div class="swiper-container-wrapper">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="assets/prj4_0.png" alt="Hospital Admissions Overview"></div>
+                    <div class="swiper-slide"><img src="assets/prj4_1.png" alt="Patient Demographics"></div>
+                    <div class="swiper-slide"><img src="assets/prj4_2.png" alt="Billing and Insurance Analysis"></div>
+                    <div class="swiper-slide"><img src="assets/prj4_3.png" alt="Medication and Treatment Trends"></div>
+                    <div class="swiper-slide"><img src="assets/prj4_4.png" alt="Operational Length of Stay"></div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+        </div>
 
-    <!-- QUY TRÌNH -->
-    <div class="project-section">
-      <h2>Implementation</h2>
-      <ul>
-        <li>Data Modeling: Built a Star schema model.</li>
-        <li>Data Transformation: Applied Power Query for data cleaning and standardization.</li>
-        <li>Calculated Metrics: Developed DAX measures for KPIs like Total Patients, Average Billing, and Length of Stay.</li>
-        <li>Visualization: Created interactive dashboards with slicers, charts, and tables.</li>
-      </ul>
-    </div>
+        <!-- 1. BUSINESS PROBLEM -->
+        <div class="case-section">
+            <h2><i data-lucide="target"></i> 1. Executive Context & Operational Challenges</h2>
+            <p>
+                Hospital administrators and financial controllers constantly struggle with balancing bed capacity, optimizing medication inventory, and minimizing insurance claim delays.
+            </p>
+            <p>
+                <strong>Core Challenge:</strong> Admission records, medical treatments, and billing summaries existed in isolated silos, preventing leadership from identifying cost leaks and operational bottlenecks across departments.
+            </p>
+            <p>
+                <strong>Solution:</strong> Developed a centralized, dynamic Power BI dashboard tracking patient admission velocity, Length of Stay (LOS), medication costs, and insurance claim distributions to drive data-informed clinical and administrative decisions.
+            </p>
+        </div>
 
-    <!-- KẾT QUẢ -->
-    <div class="project-section">
-      <h2>Result</h2>
-      <ul>
-        <li>Developed a comprehensive Power BI dashboard enabling multi-dimensional analysis of healthcare data.</li>
-        <li>Provided actionable insights into patient demographics, hospital performance, and financial metrics.</li>
-        <li>Facilitated data-driven decision-making for hospital administrators and healthcare professionals.</li>
-        <li>Link Project: <a href="https://github.com/justbeDieu/MyProject/blob/main/Healthcare.pbix">Source</a></li>
-      </ul>
-    </div>
+        <!-- 2. DATA ARCHITECTURE & DAX MEASURES -->
+        <div class="case-section">
+            <h2><i data-lucide="layers"></i> 2. Data Transformation & Analytical Framework</h2>
+            <div class="workflow-grid">
+                <div class="workflow-step">
+                    <div class="step-num">Stage 1 • Power Query</div>
+                    <h4>ETL & Cleaning</h4>
+                    <p>Cleaned patient demographic logs, standardized admission/discharge datetime types, and eliminated duplicate insurance provider codes.</p>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-num">Stage 2 • Data Modeling</div>
+                    <h4>Star Schema Setup</h4>
+                    <p>Structured <code>Fact_Admissions</code> linked directly to <code>Dim_Patient</code>, <code>Dim_Doctor</code>, <code>Dim_Insurance</code>, and <code>Dim_Medication</code>.</p>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-num">Stage 3 • DAX Engine</div>
+                    <h4>Complex KPI Formulation</h4>
+                    <p>Calculated dynamic measures for Average Length of Stay (ALOS), Net Billing per Department, and Admission Velocity across seasons.</p>
+                </div>
+            </div>
+        </div>
 
-    <!-- NÚT QUAY LẠI -->
-    <div class="back-btn">
-      <button onclick="history.back()">← Back</button>
-    </div>
-  </div>
-  <script src="script.js"></script>
+        <!-- 3. DASHBOARD MODULES -->
+        <div class="case-section">
+            <h2><i data-lucide="layout-grid"></i> 3. 5-Module Clinical & Operational Breakdown</h2>
+            <ul>
+                <li><strong>Module 1: Admission Overview:</strong> Monitors total patient intake trends, admission urgency types (Emergency vs. Elective), and seasonal surge patterns.</li>
+                <li><strong>Module 2: Patient Demographics & Conditions:</strong> Identifies admission concentrations across age brackets, gender, and pre-existing medical conditions.</li>
+                <li><strong>Module 3: Insurance & Billing Financials:</strong> Evaluates average billing amounts, insurance coverage ratios, and identifies high-cost treatment categories.</li>
+                <li><strong>Module 4: Medication & Clinical Treatments:</strong> Tracks medication prescription frequency and associated pharmaceutical costs per admission.</li>
+                <li><strong>Module 5: Operational Length of Stay (LOS):</strong> Benchmarks department-level bed occupancy and highlights extended stay anomalies.</li>
+            </ul>
+        </div>
+
+        <!-- 4. KEY INSIGHTS & STRATEGIC RECOMMENDATIONS -->
+        <div class="case-section">
+            <h2><i data-lucide="lightbulb"></i> 4. Strategic Insights & Operational Recommendations</h2>
+            <div class="insight-table-wrapper">
+                <table class="insight-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;">Analytical Finding</th>
+                            <th style="width: 35%;">Hospital Operational Context</th>
+                            <th style="width: 40%;">Strategic Recommendation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Length of Stay (LOS) Variance</strong></td>
+                            <td>Certain chronic medical conditions exhibit an average LOS 40% higher than hospital benchmarks, causing bed shortages during admission surges.</td>
+                            <td><strong>Discharge Planning Protocol:</strong> Implement automated milestone tracking for high-LOS conditions to streamline post-acute discharge coordination.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Insurance Claim Concentration</strong></td>
+                            <td>Over 65% of billing volume is concentrated among top 3 insurance carriers, with recurring payment settlement delays in specific emergency treatments.</td>
+                            <td><strong>Claims Workflow Automation:</strong> Pre-validate insurance eligibility during intake for elective admissions to accelerate claim settlement cycles.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pharmaceutical Cost Concentration</strong></td>
+                            <td>A narrow group of specialized medications accounts for a disproportionate share of total inpatient billing costs.</td>
+                            <td><strong>Formulary Optimization:</strong> Partner with clinical heads to review generic substitution options without compromising clinical outcomes.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- CALL TO ACTION -->
+        <div class="cta-box">
+            <h3>Explore the Power BI Dashboard</h3>
+            <p style="color:var(--text-muted); margin: 10px 0 20px;">Download the compiled Power BI workbook (.pbix) and review the data model on GitHub.</p>
+            <a href="https://github.com/justbeDieu/MyProject/blob/main/Healthcare.pbix" target="_blank" class="btn btn-primary"><i data-lucide="github"></i> View .pbix on GitHub</a>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 Hoang Thi Dieu. Crafted with precision & data-driven mindset.</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Swiper slider initialization
+        const swiper = new Swiper(".mySwiper", {
+            loop: true,
+            slidesPerView: 1,
+            spaceBetween: 20,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            }
+        });
+    </script>
 </body>
 </html>

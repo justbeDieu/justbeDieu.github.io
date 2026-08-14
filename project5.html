@@ -1,79 +1,463 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Healthcare Analytics Power BI Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study: Brazilian E-Commerce Analytics | Hoang Thi Dieu</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 
-  <link rel="stylesheet" href="styles.css" />
-  <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .case-study-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 120px 24px 80px;
+        }
 
-  <!-- Swiper CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+        .back-nav {
+            margin-bottom: 30px;
+        }
 
-  <!-- Swiper JS -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: gap 0.2s ease;
+        }
 
+        .back-link:hover {
+            gap: 12px;
+        }
 
+        .case-header {
+            margin-bottom: 30px;
+        }
+
+        .case-title {
+            font-size: 36px;
+            font-weight: 800;
+            line-height: 1.25;
+            margin: 12px 0;
+            color: var(--text-main);
+        }
+
+        .case-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .case-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin: 24px 0 40px;
+        }
+
+        .metric-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .metric-card .num {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .metric-card .label {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .case-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 36px;
+            margin-bottom: 30px;
+        }
+
+        .case-section h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .case-section p {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .case-section ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 14px;
+        }
+
+        .case-section ul li {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.6;
+            position: relative;
+            padding-left: 24px;
+        }
+
+        .case-section ul li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-size: 16px;
+        }
+
+        /* WORKFLOW CARDS */
+        .workflow-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .workflow-step {
+            background: #0F172A;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 18px;
+        }
+
+        .workflow-step .step-num {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .workflow-step h4 {
+            font-size: 15px;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .workflow-step p {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 0;
+            line-height: 1.5;
+        }
+
+        /* INSIGHTS TABLE */
+        .insight-table-wrapper {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        .insight-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .insight-table th {
+            background: #0F172A;
+            color: var(--primary);
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+
+        .insight-table td {
+            padding: 16px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-muted);
+            vertical-align: top;
+            line-height: 1.6;
+        }
+
+        .insight-table tr:hover td {
+            background: rgba(56, 189, 248, 0.03);
+        }
+
+        .swiper-container-wrapper {
+            margin: 30px 0;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            background: #0F172A;
+        }
+
+        .mySwiper {
+            width: 100%;
+            height: 480px;
+        }
+
+        .swiper-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #0F172A;
+        }
+
+        .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .cta-box {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.08), rgba(129, 140, 248, 0.08));
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .metrics-grid, .workflow-grid {
+                grid-template-columns: 1fr;
+            }
+            .case-title {
+                font-size: 26px;
+            }
+            .mySwiper {
+                height: 260px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="project-container">
-    <!-- HEADER -->
-    <div class="project-header">
-      <h1>Healthcare Analytics Power BI Dashboard</h1>
-      <p class="project-tags">Power BI - Healthcare Analytics - Data Visualization - ETL - DAX - Data Modeling</p>
-      <p style="font-size: 16px;">PERSONAL PROJECT</p>
-      <div class="swiper mySwiper">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide"><img src="assets/prj5_0.png"></div>
-          <div class="swiper-slide"><img src="assets/prj5_1.png"></div>
-          <div class="swiper-slide"><img src="assets/prj5_2.png"></div>
-          <div class="swiper-slide"><img src="assets/prj5_3.png"></div>
-          <div class="swiper-slide"><img src="assets/prj5_4.png"></div>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Dieu.<span>Data</span></a>
+            <a href="index.html#projects" class="nav-btn">← Back to Portfolio</a>
+        </div>
+    </header>
+
+    <main class="case-study-container">
+        
+        <div class="back-nav">
+            <a href="index.html#projects" class="back-link"><i data-lucide="arrow-left"></i> Back to Featured Projects</a>
         </div>
 
-        <!-- Pagination + Navigation -->
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
-      </div>
+        <!-- HEADER -->
+        <div class="case-header">
+            <div class="card-tags">
+                <span>SQL Views</span>
+                <span>Python EDA</span>
+                <span>Power BI Dashboard</span>
+                <span>RFM Segmentation</span>
+            </div>
+            <h1 class="case-title">Brazilian E-Commerce Marketplace Analytics</h1>
+            <div class="case-meta">
+                <span><i data-lucide="calendar"></i> 2016 – 2018 Data</span>
+                <span><i data-lucide="database"></i> ~100K Orders | ~99K Customers | ~30K Products</span>
+                <span><i data-lucide="github"></i> <a href="https://github.com/justbeDieu/Brazilian-ECommerce-Olist" target="_blank" style="color:var(--primary); text-decoration:none;">GitHub Source Code</a></span>
+            </div>
+        </div>
 
-    </div>
+        <!-- QUICK IMPACT METRICS -->
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="num">~100K</div>
+                <div class="label">Total Orders</div>
+            </div>
+            <div class="metric-card">
+                <div class="num">~99K</div>
+                <div class="label">Customers Analyzed</div>
+            </div>
+            <div class="metric-card">
+                <div class="num">4 Views</div>
+                <div class="label">Interactive Modules</div>
+            </div>
+            <div class="metric-card">
+                <div class="num">Pareto</div>
+                <div class="label">Revenue Driver Focus</div>
+            </div>
+        </div>
 
-    <!-- MỤC TIÊU -->
-    <div class="project-section">
-      <h2>Objective</h2>
-      <p>Develop an end-to-end analytics solution to analyze a Brazilian e-commerce marketplace dataset and uncover insights into sales performance, customer behavior, product demand, and seller contribution.</p>
-      <p>The objective was to transform raw transactional data into an interactive Power BI dashboard that enables stakeholders to monitor key business metrics, identify growth opportunities, and support data-driven decision-making.</p>
-    </div>
+        <!-- DASHBOARD SHOWCASE SLIDER -->
+        <div class="swiper-container-wrapper">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="assets/prj5_0.png" alt="Sales Overview"></div>
+                    <div class="swiper-slide"><img src="assets/prj5_1.jpg" alt="Customer Analysis"></div>
+                    <div class="swiper-slide"><img src="assets/prj5_2.jpg" alt="Product Performance"></div>
+                    <div class="swiper-slide"><img src="assets/prj5_3.jpg" alt="Seller Performance"></div>
+                    <div class="swiper-slide"><img src="assets/prj5_4.jpg" alt="Geographic Distribution"></div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+        </div>
 
-    <!-- QUY TRÌNH -->
-    <div class="project-section">
-      <h2>Implementation</h2>
-      <ul>
-        <li>Data Preparation: Consolidated and cleaned multiple datasets including orders, customers, products, sellers, and payments to create a structured analytical dataset.</li>
-        <li>Data Modeling: Designed a relational data model to support efficient analysis and reporting within Power BI.</li>
-        <li>Metric Development: Defined and calculated key performance indicators (KPIs) such as Total Revenue, Total Orders, Average Order Value (AOV), Customer Growth, and Seller Performance.</li>
-        <li>Dashboard Development: Built an interactive Power BI dashboard with four analytical modules: Sales Overview, Customer Analysis, Product Performance, and Seller Performance, using charts, maps, and category-level comparisons.</li>
-      </ul>
-    </div>
+        <!-- 1. BUSINESS PROBLEM -->
+        <div class="case-section">
+            <h2><i data-lucide="target"></i> 1. Project Overview & Business Objective</h2>
+            <p>
+                Olist connects thousands of small businesses across Brazil to direct marketplace consumers. Operating in a high-volume multi-category environment, leadership required a centralized reporting system to monitor overall commercial health and uncover operational bottlenecks.
+            </p>
+            <p>
+                <strong>Key Objectives:</strong>
+            </p>
+            <ul>
+                <li>Analyze overall sales growth, seasonal volatility, and average basket sizes (AOV).</li>
+                <li>Evaluate customer retention, purchasing habits by day of the week, and regional demand.</li>
+                <li>Identify high-impact product categories vs. underperforming inventory using volume-revenue benchmarking.</li>
+                <li>Assess seller concentration and fulfillment impact on customer review ratings.</li>
+            </ul>
+        </div>
 
-    <!-- KẾT QUẢ -->
-    <div class="project-section">
-      <h2>Result</h2>
-      <ul>
-        <li>Delivered an interactive analytics dashboard providing a comprehensive view of marketplace performance across sales, customers, products, and sellers.</li>
-        <li>Identified key insights including revenue trends over time, high-performing product categories, geographic distribution of customers, and revenue concentration among top sellers.</li>
-        <li>The dashboard enables faster exploration of marketplace performance and helps identify strategic opportunities for category growth and seller optimization.</li>
-        <li>Link Project: <a href="https://github.com/justbeDieu/Brazilian-ECommerce-Olist">Source</a></li>
-      </ul>
-    </div>
+        <!-- 2. ANALYTICS WORKFLOW -->
+        <div class="case-section">
+            <h2><i data-lucide="layers"></i> 2. End-to-End Analytics Workflow</h2>
+            <p>
+                To maintain data integrity and query efficiency, the project followed a structured 3-stage data lifecycle:
+            </p>
+            <div class="workflow-grid">
+                <div class="workflow-step">
+                    <div class="step-num">Stage 1 • SQL Layer</div>
+                    <h4>Data Prep & Views</h4>
+                    <p>Indexed key foreign keys; created Master View joining orders, payments, and reviews; established dedicated customer, product, and seller analytical views.</p>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-num">Stage 2 • Python Layer</div>
+                    <h4>Exploratory Data Analysis</h4>
+                    <p>Analyzed multi-year sales trends, calculated RFM customer segments, and investigated correlations between delivery delays and review drops.</p>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-num">Stage 3 • Power BI Layer</div>
+                    <h4>Interactive Reporting</h4>
+                    <p>Designed a 4-module dashboard featuring custom DAX KPIs, bubble charts for product segmentation, and state-level geographic heatmaps.</p>
+                </div>
+            </div>
+        </div>
 
-    <!-- NÚT QUAY LẠI -->
-    <div class="back-btn">
-      <button onclick="history.back()">← Back</button>
-    </div>
-  </div>
-  <script src="script.js"></script>
+        <!-- 3. DASHBOARD MODULES -->
+        <div class="case-section">
+            <h2><i data-lucide="layout-grid"></i> 3. 4-Module Executive BI Architecture</h2>
+            <ul>
+                <li><strong>Module 1: Sales Overview:</strong> Tracks Total Revenue, Total Orders, Average Order Value (AOV), and Average Review Score alongside monthly growth trajectories and weekday purchasing trends.</li>
+                <li><strong>Module 2: Customer Analysis:</strong> Examines total unique customer volume, repeat purchase behavior, and geographic customer concentration across Brazilian states (São Paulo, Rio de Janeiro).</li>
+                <li><strong>Module 3: Product Performance:</strong> Utilizes a <em>Revenue vs. Orders Bubble Chart</em> to clearly separate high-margin niche items from fast-moving consumer products.</li>
+                <li><strong>Module 4: Seller Performance:</strong> Benchmarks seller growth against customer demand, tracking top seller revenue contribution and fulfillment efficiency.</li>
+            </ul>
+        </div>
+
+        <!-- 4. KEY INSIGHTS & STRATEGIC RECOMMENDATIONS -->
+        <div class="case-section">
+            <h2><i data-lucide="lightbulb"></i> 4. Key Insights & Actionable Recommendations</h2>
+            <div class="insight-table-wrapper">
+                <table class="insight-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;">Analytical Finding</th>
+                            <th style="width: 35%;">Business Context</th>
+                            <th style="width: 40%;">Strategic Recommendation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Revenue Concentration (Pareto Principle)</strong></td>
+                            <td>A small percentage of product categories (Health & Beauty, Watches, Bed & Bath) generate the vast majority of marketplace revenue.</td>
+                            <td><strong>Cross-selling & Bundling:</strong> Prioritize top categories in marketing promotions and create combo discounts with slower-moving complementary accessories to raise overall basket size.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Weekday Purchasing Peaks</strong></td>
+                            <td>Order volume consistently peaks from Monday to Thursday during working hours, with a marked decline over weekends.</td>
+                            <td><strong>Campaign Scheduling:</strong> Allocate digital ad spend and launch flash-sale vouchers specifically on Tuesday and Thursday afternoons to capture peak user attention.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Parallel Supply-Demand Expansion</strong></td>
+                            <td>Gross revenue growth correlates strongly with the simultaneous influx of both active buyers and new merchant onboardings.</td>
+                            <td><strong>Regional Merchant Acquisition:</strong> Target seller onboarding in high-demand, underserved geographic states to lower interstate freight costs and delivery lead times.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fulfillment Impact on Trust</strong></td>
+                            <td>Overall customer ratings remain high; however, review scores drop sharply whenever delivery exceeds estimated delivery dates.</td>
+                            <td><strong>Logistics SLA Enforcement:</strong> Establish merchant fulfillment SLAs (< 24h dispatch time) and offer fee rebates to high-performing sellers with zero delivery delay rates.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- CALL TO ACTION -->
+        <div class="cta-box">
+            <h3>Explore the Complete Project Repository</h3>
+            <p style="color:var(--text-muted); margin: 10px 0 20px;">Access the SQL analytical views, Jupyter notebooks (EDA), and Power BI dashboard file (.pbix).</p>
+            <a href="https://github.com/justbeDieu/Brazilian-ECommerce-Olist" target="_blank" class="btn btn-primary"><i data-lucide="github"></i> View on GitHub</a>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 Hoang Thi Dieu. Crafted with precision & data-driven mindset.</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Swiper slider initialization
+        const swiper = new Swiper(".mySwiper", {
+            loop: true,
+            slidesPerView: 1,
+            spaceBetween: 20,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            }
+        });
+    </script>
 </body>
 </html>

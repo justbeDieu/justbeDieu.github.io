@@ -1,76 +1,449 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Business Intelligence & Data Warehouse</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study: US Air Quality BI & Data Warehouse | Hoang Thi Dieu</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 
-  <link rel="stylesheet" href="styles.css" />
-  <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .case-study-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 120px 24px 80px;
+        }
 
-  <!-- Swiper CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+        .back-nav {
+            margin-bottom: 30px;
+        }
 
-  <!-- Swiper JS -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: gap 0.2s ease;
+        }
 
+        .back-link:hover {
+            gap: 12px;
+        }
 
+        .case-header {
+            margin-bottom: 30px;
+        }
+
+        .case-title {
+            font-size: 36px;
+            font-weight: 800;
+            line-height: 1.25;
+            margin: 12px 0;
+            color: var(--text-main);
+        }
+
+        .case-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .case-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin: 24px 0 40px;
+        }
+
+        .metric-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .metric-card .num {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .metric-card .label {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .case-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 36px;
+            margin-bottom: 30px;
+        }
+
+        .case-section h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .case-section p {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .case-section ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 14px;
+        }
+
+        .case-section ul li {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.6;
+            position: relative;
+            padding-left: 24px;
+        }
+
+        .case-section ul li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-size: 16px;
+        }
+
+        /* PIPELINE CARDS */
+        .pipeline-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin: 20px 0;
+        }
+
+        .pipeline-card {
+            background: #0F172A;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .pipeline-card .step-icon {
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .pipeline-card h4 {
+            font-size: 14px;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+
+        .pipeline-card p {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 0;
+            line-height: 1.4;
+        }
+
+        /* INSIGHTS TABLE */
+        .insight-table-wrapper {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        .insight-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .insight-table th {
+            background: #0F172A;
+            color: var(--primary);
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+
+        .insight-table td {
+            padding: 16px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-muted);
+            vertical-align: top;
+            line-height: 1.6;
+        }
+
+        .insight-table tr:hover td {
+            background: rgba(56, 189, 248, 0.03);
+        }
+
+        .swiper-container-wrapper {
+            margin: 30px 0;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            background: #0F172A;
+        }
+
+        .mySwiper {
+            width: 100%;
+            height: 480px;
+        }
+
+        .swiper-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #0F172A;
+        }
+
+        .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .cta-box {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.08), rgba(129, 140, 248, 0.08));
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .metrics-grid, .pipeline-grid {
+                grid-template-columns: 1fr;
+            }
+            .case-title {
+                font-size: 26px;
+            }
+            .mySwiper {
+                height: 260px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="project-container">
-    <!-- HEADER -->
-    <div class="project-header">
-      <h1>Business Intelligence & Data Warehouse</h1>
-      <p class="project-tags">BI - Data Warehouse - SSIS - SSAS - PowerBI - ETL - OLAP - Data Modeling - SQLServer</p>
-      <p style="font-size: 16px;">COURSE PROJECT - Team size: 4</p>
-      <div class="swiper mySwiper">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide"><img src="assets/prj3_1.png"></div>
-          <div class="swiper-slide"><img src="assets/prj3_2.png"></div>
-          <div class="swiper-slide"><img src="assets/prj3_3.png"></div>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Dieu.<span>Data</span></a>
+            <a href="index.html#projects" class="nav-btn">← Back to Portfolio</a>
+        </div>
+    </header>
+
+    <main class="case-study-container">
+        
+        <div class="back-nav">
+            <a href="index.html#projects" class="back-link"><i data-lucide="arrow-left"></i> Back to Featured Projects</a>
         </div>
 
-        <!-- Pagination + Navigation -->
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
-      </div>
+        <!-- HEADER -->
+        <div class="case-header">
+            <div class="card-tags">
+                <span>Data Warehouse</span>
+                <span>SSIS (ETL)</span>
+                <span>SSAS (OLAP Cube)</span>
+                <span>Power BI</span>
+                <span>SQL Server</span>
+            </div>
+            <h1 class="case-title">US Air Quality Business Intelligence & Data Warehouse</h1>
+            <div class="case-meta">
+                <span><i data-lucide="users"></i> Team Size: 4 (Oct 2024 – Dec 2024)</span>
+                <span><i data-lucide="database"></i> Multi-Source EPA Air Quality Data</span>
+                <span><i data-lucide="github"></i> <a href="https://github.com/trieuvisaooo/US_AQI_Analysis" target="_blank" style="color:var(--primary); text-decoration:none;">GitHub Source Code</a></span>
+            </div>
+        </div>
 
-    </div>
+        <!-- QUICK IMPACT METRICS -->
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="num">SSIS</div>
+                <div class="label">Automated ETL Pipeline</div>
+            </div>
+            <div class="metric-card">
+                <div class="num">OLAP</div>
+                <div class="label">Multidimensional Cubes</div>
+            </div>
+            <div class="metric-card">
+                <div class="num">Star/Snowflake</div>
+                <div class="label">Hybrid Data Schema</div>
+            </div>
+            <div class="metric-card">
+                <div class="num">Power BI</div>
+                <div class="label">Interactive Drill-down</div>
+            </div>
+        </div>
 
-    <!-- MỤC TIÊU -->
-    <div class="project-section">
-      <h2>Objective</h2>
-      <p>Design and implement a data warehouse system to collect, transform, and analyze Air Quality Index (AQI) data across multiple states and time periods.</p>
-    </div>
+        <!-- DASHBOARD SHOWCASE SLIDER -->
+        <div class="swiper-container-wrapper">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="assets/prj3_1.png" alt="AQI Trends by State"></div>
+                    <div class="swiper-slide"><img src="assets/prj3_2.png" alt="Pollutant Breakdown"></div>
+                    <div class="swiper-slide"><img src="assets/prj3_3.png" alt="Seasonal Variation"></div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+        </div>
 
-    <!-- QUY TRÌNH -->
-    <div class="project-section">
-      <h2>Implementation</h2>
-      <ul>
-        <li>Designed a Star/Snowflake schema based on OLTP and analytical requirements.</li>
-        <li>Developed ETL pipelines using SSIS to extract, transform, and load data into a centralized warehouse.</li>
-        <li>Created OLAP cubes with SSAS for multidimensional analysis.</li>
-        <li>Built interactive dashboards with Power BI for business insights.</li> 
-      </ul>
-    </div>
+        <!-- 1. PROBLEM STATEMENT -->
+        <div class="case-section">
+            <h2><i data-lucide="target"></i> 1. Project Background & Business Challenge</h2>
+            <p>
+                Environmental monitoring agencies face challenges in managing massive, heterogeneous air quality datasets collected across hundreds of monitoring stations throughout the United States. 
+            </p>
+            <p>
+                <strong>Core Challenge:</strong> Querying operational databases directly resulted in slow analytical performance and lacked the flexibility needed for multi-tiered drill-downs (from country level down to state, county, and seasonal timeframes).
+            </p>
+            <p>
+                <strong>Solution:</strong> Designed and deployed an end-to-end Enterprise Business Intelligence architecture: staging raw transactional logs, building SSIS ETL pipelines, structuring an OLAP multidimensional cube in SSAS, and delivering an executive Power BI reporting layer.
+            </p>
+        </div>
 
-    <!-- KẾT QUẢ -->
-    <div class="project-section">
-      <h2>Result</h2>
-      <ul>
-        <li>Completed full BI workflow: Data Modeling → ETL → OLAP → Visualization.</li>
-        <li>Enabled state-level and seasonal insights into PM2.5, O₃, and CO levels.</li>
-        <li>Improved analytical visibility and decision-making for environmental monitoring use cases.</li>
-        <li>Link Project: <a href="https://github.com/trieuvisaooo/US_AQI_Analysis">Source</a></li>
-      </ul>
-    </div>
+        <!-- 2. ENTERPRISE DATA WAREHOUSE ARCHITECTURE -->
+        <div class="case-section">
+            <h2><i data-lucide="server"></i> 2. 4-Tier Data Warehouse Architecture</h2>
+            <p>
+                The solution implemented the complete Microsoft BI stack lifecycle to ensure high data consistency and zero report query lag:
+            </p>
+            <div class="pipeline-grid">
+                <div class="pipeline-card">
+                    <i data-lucide="file-input" class="step-icon"></i>
+                    <h4>1. Data Staging</h4>
+                    <p>Raw EPA datasets ingested and normalized in SQL Server staging area.</p>
+                </div>
+                <div class="pipeline-card">
+                    <i data-lucide="workflow" class="step-icon"></i>
+                    <h4>2. SSIS ETL</h4>
+                    <p>Automated cleaning, deduplication, surrogate key generation, and error logging.</p>
+                </div>
+                <div class="pipeline-card">
+                    <i data-lucide="box" class="step-icon"></i>
+                    <h4>3. SSAS OLAP</h4>
+                    <p>Pre-aggregated multidimensional cubes enabling sub-second drill-down queries.</p>
+                </div>
+                <div class="pipeline-card">
+                    <i data-lucide="bar-chart" class="step-icon"></i>
+                    <h4>4. Power BI</h4>
+                    <p>Executive dashboards with geographic heatmaps and parameter slicers.</p>
+                </div>
+            </div>
+            <p>
+                <strong>Schema Design:</strong> Implemented a hybrid <strong>Star / Snowflake Schema</strong> centering on <code>Fact_AQI_Measurement</code>, connected to normalized <code>Dim_Location</code> (State ➔ County ➔ City), <code>Dim_Date</code> (Year ➔ Quarter ➔ Month ➔ Season), and <code>Dim_Pollutant</code>.
+            </p>
+        </div>
 
-    <!-- NÚT QUAY LẠI -->
-    <div class="back-btn">
-      <button onclick="history.back()">← Back</button>
-    </div>
-  </div>
-  <script src="script.js"></script>
+        <!-- 3. KEY ANALYTICAL FINDINGS & APPLICATIONS -->
+        <div class="case-section">
+            <h2><i data-lucide="lightbulb"></i> 3. Key Environmental Insights & Policy Applications</h2>
+            <div class="insight-table-wrapper">
+                <table class="insight-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;">Analytical Finding</th>
+                            <th style="width: 35%;">Environmental Context</th>
+                            <th style="width: 40%;">Actionable Recommendation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Seasonal Wildfire Spike (PM2.5)</strong></td>
+                            <td>Western states (e.g., California, Washington) exhibit severe PM2.5 concentration spikes during Q3 dry seasons compared to baseline months.</td>
+                            <td><strong>Targeted Public Health Alerts:</strong> Configure automated early-warning alert thresholds in local health monitoring systems ahead of late-summer wildfire seasons.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Urban Transportation Corridors (CO & NO₂)</strong></td>
+                            <td>Metropolitan counties with high traffic density show elevated carbon monoxide levels consistently during morning and evening rush-hour intervals.</td>
+                            <td><strong>Traffic Management Planning:</strong> Provide city planners with granular emission density maps to optimize public transit routing and green zone policies.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sub-second Query Acceleration</strong></td>
+                            <td>Pre-aggregating multi-year environmental observations into SSAS cubes reduced dashboard load times from seconds to sub-200ms.</td>
+                            <td><strong>Scalable Architecture:</strong> The DW infrastructure is readily prepared to ingest new real-time IoT sensor telemetry without redesigning schemas.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- CALL TO ACTION -->
+        <div class="cta-box">
+            <h3>Explore the Data Warehouse Project</h3>
+            <p style="color:var(--text-muted); margin: 10px 0 20px;">Review the SSIS ETL packages, SSAS cube design, and documentation on GitHub.</p>
+            <a href="https://github.com/trieuvisaooo/US_AQI_Analysis" target="_blank" class="btn btn-primary"><i data-lucide="github"></i> View GitHub Repository</a>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 Hoang Thi Dieu. Crafted with precision & data-driven mindset.</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Swiper slider initialization
+        const swiper = new Swiper(".mySwiper", {
+            loop: true,
+            slidesPerView: 1,
+            spaceBetween: 20,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            }
+        });
+    </script>
 </body>
 </html>

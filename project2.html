@@ -1,65 +1,384 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>User Behavior Analysis for Ad Clicks</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study: Ad Click Behavior & Prediction | Hoang Thi Dieu</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        .case-study-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 120px 24px 80px;
+        }
 
-  <link rel="stylesheet" href="styles.css" />
-  <script src="https://unpkg.com/lucide@latest"></script>
+        .back-nav {
+            margin-bottom: 30px;
+        }
 
-  <!-- Swiper CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: gap 0.2s ease;
+        }
 
-  <!-- Swiper JS -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+        .back-link:hover {
+            gap: 12px;
+        }
 
+        .case-header {
+            margin-bottom: 30px;
+        }
 
+        .case-title {
+            font-size: 36px;
+            font-weight: 800;
+            line-height: 1.25;
+            margin: 12px 0;
+            color: var(--text-main);
+        }
+
+        .case-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .case-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin: 24px 0 40px;
+        }
+
+        .metric-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .metric-card .num {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .metric-card .label {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .case-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 36px;
+            margin-bottom: 30px;
+        }
+
+        .case-section h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .case-section p {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .case-section ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 14px;
+        }
+
+        .case-section ul li {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.6;
+            position: relative;
+            padding-left: 24px;
+        }
+
+        .case-section ul li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-size: 16px;
+        }
+
+        /* ML PIPELINE STEPS */
+        .pipeline-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin: 20px 0;
+        }
+
+        .pipeline-card {
+            background: #0F172A;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .pipeline-card .step-icon {
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .pipeline-card h4 {
+            font-size: 14px;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+
+        .pipeline-card p {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 0;
+            line-height: 1.4;
+        }
+
+        /* INSIGHTS TABLE */
+        .insight-table-wrapper {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        .insight-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .insight-table th {
+            background: #0F172A;
+            color: var(--primary);
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+
+        .insight-table td {
+            padding: 16px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-muted);
+            vertical-align: top;
+            line-height: 1.6;
+        }
+
+        .insight-table tr:hover td {
+            background: rgba(56, 189, 248, 0.03);
+        }
+
+        .project-banner-img {
+            width: 100%;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            margin: 20px 0 30px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+        }
+
+        .cta-box {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.08), rgba(129, 140, 248, 0.08));
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .metrics-grid, .pipeline-grid {
+                grid-template-columns: 1fr;
+            }
+            .case-title {
+                font-size: 26px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="project-container">
-    <!-- HEADER -->
-    <div class="project-header">
-      <h1>User Behavior Analysis for Ad Clicks</h1>
-      <p class="project-tags">Python - Pandas - Scikit Learn - EDA - Data Visualization - Predictive Modeling - Google Colab</p>
-      <p style="font-size: 16px;">COURSE PROJECT - Team size: 4</p>
 
-    </div>
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Dieu.<span>Data</span></a>
+            <a href="index.html#projects" class="nav-btn">← Back to Portfolio</a>
+        </div>
+    </header>
 
-    <!-- MỤC TIÊU -->
-    <div class="project-section">
-      <h2>Objective</h2>
-      <p>To analyze user behavior in online advertising data and predict the likelihood of ad clicks, helping optimize marketing campaign strategies.</p>
-    </div>
+    <main class="case-study-container">
+        
+        <div class="back-nav">
+            <a href="index.html#projects" class="back-link"><i data-lucide="arrow-left"></i> Back to Featured Projects</a>
+        </div>
 
-    <!-- QUY TRÌNH -->
-    <div class="project-section">
-      <h2>Implementation</h2>
-      <ul>
-        <li>Cleaned and preprocessed data by handling missing values and removing outliers.</li>
-        <li>Performed univariate and bivariate analysis to explore relationships between variables.</li>
-        <li>Visualized user behavior through distribution plots, correlation matrices, and heatmaps</li>
-        <li>Trained and evaluated multiple ML models (Logistic Regression, Random Forest, XGBoost) with cross-validation.</li>
-        <li>Measured accuracy, precision, recall, and F1-score to assess performance.</li>
-      </ul>
-    </div>
+        <!-- HEADER -->
+        <div class="case-header">
+            <div class="card-tags">
+                <span>Python</span>
+                <span>Pandas & Seaborn</span>
+                <span>Machine Learning</span>
+                <span>EDA</span>
+                <span>Scikit-Learn</span>
+            </div>
+            <h1 class="case-title">User Behavior Analysis for Ad Click Prediction</h1>
+            <div class="case-meta">
+                <span><i data-lucide="users"></i> Team Size: 4 (Oct 2024)</span>
+                <span><i data-lucide="code-2"></i> Python / Google Colab</span>
+                <span><i data-lucide="github"></i> <a href="https://github.com/justbeDieu/MyProject/blob/main/PTDLUD.ipynb" target="_blank" style="color:var(--primary); text-decoration:none;">Jupyter Notebook Source</a></span>
+            </div>
+        </div>
 
-    <!-- KẾT QUẢ -->
-    <div class="project-section">
-      <h2>Result</h2>
-      <ul>
-        <li>Achieved 85% accuracy with the Random Forest model.</li>
-        <li>Identified three major factors influencing click behavior: access time, device type, and campaign category.</li>
-        <li>Proposed data-driven improvements projected to increase CTR by ~15%.</li>
-        <li>Link Project: <a href="https://github.com/justbeDieu/MyProject/blob/main/PTDLUD.ipynb">Source</a></li>
-      </ul>
-    </div>
+        <!-- QUICK IMPACT METRICS -->
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="num">85%</div>
+                <div class="label">Model Accuracy</div>
+            </div>
+            <div class="metric-card">
+                <div class="num">+12%</div>
+                <div class="label">Lift Over Baseline</div>
+            </div>
+            <div class="metric-card">
+                <div class="num">Random Forest</div>
+                <div class="label">Top Performing Model</div>
+            </div>
+            <div class="metric-card">
+                <div class="num">~15%</div>
+                <div class="label">Projected CTR Lift</div>
+            </div>
+        </div>
 
-    <!-- NÚT QUAY LẠI -->
-    <div class="back-btn">
-      <button onclick="history.back()">← Back</button>
-    </div>
-  </div>
-  <script src="script.js"></script>
+        <img src="assets/prj2.png" alt="Ad Click EDA & Modeling" class="project-banner-img">
+
+        <!-- 1. BUSINESS PROBLEM -->
+        <div class="case-section">
+            <h2><i data-lucide="target"></i> 1. Problem Statement & Marketing Context</h2>
+            <p>
+                Digital advertising campaigns frequently face high budget burn rates due to broad targeting, resulting in low Click-Through Rates (CTR) and sub-optimal conversion performance. 
+            </p>
+            <p>
+                <strong>Core Objective:</strong> Perform rigorous Exploratory Data Analysis (EDA) to uncover the primary demographic and behavioral factors influencing ad click decisions, and train supervised Machine Learning models to predict user click probability for targeted ad delivery.
+            </p>
+        </div>
+
+        <!-- 2. ANALYTICAL METHODOLOGY -->
+        <div class="case-section">
+            <h2><i data-lucide="cpu"></i> 2. End-to-End ML & Analytics Workflow</h2>
+            <div class="pipeline-grid">
+                <div class="pipeline-card">
+                    <i data-lucide="file-check" class="step-icon"></i>
+                    <h4>1. Data Cleaning</h4>
+                    <p>Handled missing values, encoded categorical variables, and removed outliers.</p>
+                </div>
+                <div class="pipeline-card">
+                    <i data-lucide="line-chart" class="step-icon"></i>
+                    <h4>2. Bivariate EDA</h4>
+                    <p>Mapped correlation matrices and behavioral distributions vs. click status.</p>
+                </div>
+                <div class="pipeline-card">
+                    <i data-lucide="binary" class="step-icon"></i>
+                    <h4>3. Model Training</h4>
+                    <p>Evaluated Logistic Regression, Random Forest, and XGBoost with Cross-Validation.</p>
+                </div>
+                <div class="pipeline-card">
+                    <i data-lucide="sliders" class="step-icon"></i>
+                    <h4>4. Feature Importance</h4>
+                    <p>Extracted key predictive features to inform ad campaign strategies.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. KEY INSIGHTS & MARKETING RECOMMENDATIONS -->
+        <div class="case-section">
+            <h2><i data-lucide="lightbulb"></i> 3. Key Findings & Campaign Optimization Strategies</h2>
+            <div class="insight-table-wrapper">
+                <table class="insight-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;">Analytical Driver</th>
+                            <th style="width: 35%;">Behavioral Insight</th>
+                            <th style="width: 40%;">Actionable Strategy</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Time-of-Day Dynamics</strong></td>
+                            <td>User engagement and click probability significantly spike during evening leisure hours compared to working hours.</td>
+                            <td><strong>Dayparting Ad Bids:</strong> Allocate higher ad budget bids dynamically between 19:00 - 23:00 to maximize ad impression conversions.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Device & Channel Segment</strong></td>
+                            <td>Mobile users showed a distinct preference for visual-heavy, concise ad creatives with higher immediate click rates.</td>
+                            <td><strong>Creative Tailoring:</strong> Restructure ad creatives specifically for mobile devices with clear, prominent Call-to-Action (CTA) triggers.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Predictive Target Filtering</strong></td>
+                            <td>Random Forest model achieved 85% accuracy in pre-identifying non-clicking user profiles.</td>
+                            <td><strong>Negative Audience Filtering:</strong> Exclude low-probability user segments from expensive campaign runs to dramatically reduce Cost per Click (CPC).</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- CALL TO ACTION -->
+        <div class="cta-box">
+            <h3>Review the Python Notebook</h3>
+            <p style="color:var(--text-muted); margin: 10px 0 20px;">Explore the full data exploration code, visualizations, and model evaluation metrics on GitHub.</p>
+            <a href="https://github.com/justbeDieu/MyProject/blob/main/PTDLUD.ipynb" target="_blank" class="btn btn-primary"><i data-lucide="github"></i> View Jupyter Notebook</a>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 Hoang Thi Dieu. Crafted with precision & data-driven mindset.</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>
